@@ -9,7 +9,7 @@
     <div >
     <h1></h1>
         <table >
-        <tr><th> Date </th>
+        <tr><th>Date</th>
         <th>Username</th>
         <th>Phone Number</th>
         <th>Country</th>
@@ -17,7 +17,7 @@
         </tr>
         @foreach($dates as $key => $value)
         <tr>
-        <?php $date=$value['date'];
+        <?php 
         $elements=$value['elements'];
         foreach ($elements as $key2 => $value2) {
             $curl = curl_init();
@@ -42,6 +42,7 @@
             $numbers = $newjsonDecoded['responses']['phoneNumberStats'];
             foreach ($numbers as $key3 => $value3) {
                 $elements2 = $value3['elements'];
+                $date= $value3['date'];
                 foreach ($elements2 as $key4 => $value4) {
                     $number = $key4;
                     $duration = $value4;
@@ -62,7 +63,7 @@
                     echo "<td>$key2</td>";
                     echo "<td>$number</td>";
                     echo "<td>$country</td>";
-                    echo "<td>$duration</td>";
+                    echo "<td>$minutes</td>";
                     echo "</tr>";
                 }
                 

@@ -1,7 +1,7 @@
 @extends('layout')
 
 @section('title')
-    users
+    <?php echo $username ?>
 @endsection
 
 @section('content')
@@ -19,10 +19,12 @@
         <tr>
         <?php $date=$value['date'];
         $elements=$value['elements'];
+        $total = array();
         foreach ($elements as $key2 => $value2) {
             $number = $key2;
             $duration = $value2;
             $minutes = $duration/60;
+            array_push($total, $minutes);
             if (strlen($number) <25 ) {
                 if (substr($number, 0, 4) == +254) {
                     $country = "KE";
@@ -42,6 +44,8 @@
             echo "<td>$minutes</td>";
             echo "</tr>";
         }
+        $totalMinutes = array_sum($total);
+        echo "<tr><td><b>Total</b><td></td><td></td><td></td><td><b>$totalMinutes</b></td></tr>";
         ?>
         @endforeach
         </table>

@@ -1,6 +1,6 @@
 <?php
 
-/**
+/*
 |--------------------------------------------------------------------------
 | Web Routes
 |--------------------------------------------------------------------------
@@ -13,44 +13,14 @@
 
 Route::any(
     '/', function () {
-        $curl = curl_init();
-        curl_setopt_array(
-            $curl, array(
-            CURLOPT_URL => "http://134.213.238.76:8080/voice/outbound/success?granularity=day&startDate=2018-08-01&endDate=2018-08-31&metric=duration&currencyCode=KES",
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_CUSTOMREQUEST => "GET",
-            CURLOPT_HTTPHEADER => array(
-                "ApiKey: 5afe31f1daa3de899c690f0172a719cee1f59e0a3251ec432f021c81b4d87ffd"
-            ),
-            )
-        );
-        $response = curl_exec($curl);
-        $err = curl_error($curl);
-        curl_close($curl);
-        if ($err) {
-            echo "cURL Error #:" . $err;
-        }
-        $jsonString = $response;
-        $jsonDecoded = json_decode($jsonString, true);
-        $users=$jsonDecoded["responses"]["userStats"][0]["elements"];
-        $date=$jsonDecoded["responses"]["userStats"][0]["date"];
         return view(
-            'welcome', [
-            'users' => $users,
-            'date' => $date
-            ]
+            'welcome'
         );
     }
 );
 
 Route::any(
     '/user', function () {
-        // $userdata = array( 
-        //     'username'      => $_REQUEST['username'], 
-        //     'start'         => $_REQUEST['startDate'], 
-        //     'end'           => $_REQUEST['endDate'],
-        //     'direction'     => $_REQUEST['direction']
-        // );
         $direction=$_REQUEST['direction'];
         $start=$_REQUEST['startDate'];
         $end=$_REQUEST['endDate'];
@@ -81,25 +51,17 @@ Route::any(
             'dates' => $dates,
             'jsonDecoded' => $jsonDecoded,
             'numbers' => $numbers,
-            'username' => $username
+            'username' => $username,
+            'direction' => $direction
             ]
         );
     }
 );
-
 Route::any(
-    '/inbound', function () {
-        return view(
-            'inbound'
-        );
-    }
-);
-
-Route::any(
-    '/users', function () {
-        $start     =$_GET['startDate'];
-        $end     =$_GET['endDate'];
-        $direction     =$_GET['direction'];
+    '/alluserdata', function () {
+        $start     =$_REQUEST['startDate'];
+        $end     =$_REQUEST['endDate'];
+        $direction     =$_REQUEST['direction'];
         $curl = curl_init();
         curl_setopt_array(
             $curl, array(
@@ -119,7 +81,63 @@ Route::any(
         }
         $jsonString = $response;
         $jsonDecoded = json_decode($jsonString, true);
-        $users=$jsonDecoded["responses"]["userStats"][0]["elements"];
+        $dates = $jsonDecoded["responses"]["userStats"];
+        return view(
+            'alluserdata', [
+                'dates' => $dates,
+                'direction' => $direction,
+                'start' => $start,
+                'end' => $end
+            ]
+        );
+    }
+);
+
+Route::any(
+    '/inbound', function () {
+        return view(
+            'inbound'
+        );
+    }
+);
+
+Route::any(
+    '/users', function () {
+        $start     =$_REQUEST['startDate'];
+        $end     =$_REQUEST['endDate'];
+        $direction     =$_REQUEST['direction'];
+        $curl = curl_init();
+        curl_setopt_array(
+            $curl, array(
+            CURLOPT_URL => "http://134.213.238.76:8080/voice/$direction/success?granularity=day&startDate=$start&endDate=$end&metric=duration",
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_CUSTOMREQUEST => "GET",
+            CURLOPT_HTTPHEADER => array(
+                "ApiKey: 5afe31f1daa3de899c690f0172a719cee1f59e0a3251ec432f021c81b4d87ffd"
+            ),
+            )
+        );
+        $response = curl_exec($curl);
+        $err = curl_error($curl);
+        curl_close($curl);
+        if ($err) {
+            echo "cURL Error #:" . $err;
+        }
+        $jsonString = $response;
+        $jsonDecoded = json_decode($jsonString, true);
+        $userdata=$jsonDecoded["responses"]["userStats"];
+        $users = array();
+        foreach ($userdata as $key => $value) {
+            $elements=$value['elements'];
+            foreach ($elements as $key2 => $value2) {
+                if (in_array($key2, $users)) {
+                    $users = $users;
+                } else {
+                    array_push($users, $key2);
+                }
+            }
+          
+        }
         return view(
             'users',  [
             'users'     => $users,

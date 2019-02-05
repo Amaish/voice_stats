@@ -3,6 +3,7 @@
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
+        <title>@yield('title')</title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
@@ -78,7 +79,8 @@
             }
             table {   
                 border: 2px solid #f0f0f0;
-                color: white; 
+                color: white;
+                border-radius: 5px;
             }
             td {
                 border: 1px solid #f0f0f0;
@@ -90,6 +92,23 @@
                 padding: 10px;
                 background-color: #f07830;
             }
+            input {
+                background-color: #f07830;
+                border: 1px solid #f07830;
+                padding: 5px;
+                border-radius: 5px;
+                color: white; 
+            }
+            #done:hover{
+                background-color: 	#f09018;
+            }
+            select, option {
+                background-color: #f07830;
+                border: 1px solid #f07830;
+                padding: 5px;
+                border-radius: 5px;
+                color: white; 
+            }
 
         </style>   
     </head> 
@@ -100,6 +119,15 @@
         <img src ="https://account.africastalking.com/assets/img/logos/logo-full-color.png" class="center">
     </div>
     </div>
+    <?php
+    if (isset($direction)) {
+        echo "<b><span style='padding:1%'>Direction:</b>$direction</span><br>";
+    } else {
+        $direction = " not provided";
+        echo "<b><span style='padding:1%'>Direction:</b>$direction</span><br>";
+    }
+    
+    ?>
     @yield('content')
     </body>
 </html>

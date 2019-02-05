@@ -5,20 +5,26 @@
 @endsection
 
 @section('content')
-<section class="center" style="margin-left:25%">
-    <form action="/user">
-        <input type="hidden" id="startDate" name="startDate" value="<?=$start?>">
-        <input type="hidden" id="endDate" name="endDate" value="<?=$end?>">
-        <input type="hidden" id="direction" name="direction" value="<?=$direction?>">
-        <select name="username" required style="background-color: #007830;color: white;border: 1px #007830;">
-            <option value="">Please select username</option>
-            @foreach(array_keys($users) as $userval)
-                <option value="<?=$userval?>">{{ $userval }}</option>
-            @endforeach
-        </select>
-
-        <input style= "background-color: #007830;color: white;border: 1px #007830;" type="submit" value="Go"/>
-
-    </form>
+<section class="center" style="margin-left:25%;margin-right:25%;margin-top:5%;">
+    <div class="center"style=" background-color: #007848; border-radius: 10px;">
+        <form action="/user">
+            <input type="hidden" id="startDate" name="startDate" value="<?php echo $start?>">
+            <input type="hidden" id="endDate" name="endDate" value="<?php echo $end?>">
+            <input type="hidden" id="direction" name="direction" value="<?php echo $direction?>">
+            <select name="username" required>
+                <option value="">Please select username</option>
+                @foreach($users as $userval)
+                    <option value="<?php echo $userval?>">{{ $userval }}</option>
+                @endforeach
+            </select>
+            <input type="submit" value="Go"/>
+        </form>
+        <form action="/alluserdata">
+        <input type="hidden" id="startDate" name="startDate" value="<?php echo $start?>">
+        <input type="hidden" id="endDate" name="endDate" value="<?php echo $end?>">
+        <input type="hidden" id="direction" name="direction" value="<?php echo $direction?>">
+        <input type="submit" value="All Users"/>
+        </form>
+    </div> 
     </section>
 @endsection

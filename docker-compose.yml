@@ -1,0 +1,8 @@
+version: '2.1'
+
+services:
+  voice_stats:
+    image: voice_stats
+    build: .
+    ports:
+      - 8181:8181

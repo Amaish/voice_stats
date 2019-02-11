@@ -1,0 +1,10 @@
+version: '2.1'
+
+services:
+  voice_stats:
+    image: voice_stats
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 8081:8081

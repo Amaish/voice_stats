@@ -11,6 +11,6 @@ $.ajaxSetup({
             {
                 direction: direction
             },)
-            alert(direction);
+            // alert(direction);
         });
         });

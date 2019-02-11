@@ -11,7 +11,7 @@
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
       <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
    </head>
-   <body background="https://www.africastalking.com/img/new/landing-graphic.png">
+   <body background="https://africastalking.com/img/voice/banner.png">
       <section >
          <div style= "background-color: #f0f0f0;">
             <div>

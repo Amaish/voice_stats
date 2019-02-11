@@ -15,6 +15,7 @@
         <th>Country</th>
         <th>Duration In Minutes</th>
         </tr>
+        <?php $totalMinutes = 0; ?>
         @foreach($dates as $key => $value)
         <tr>
         <?php $date=$value['date'];
@@ -44,10 +45,12 @@
             echo "<td>$minutes</td>";
             echo "</tr>";
         }
-        $totalMinutes = array_sum($total);
-        echo "<tr><td><b>Total</b><td></td><td></td><td></td><td><b>$totalMinutes</b></td></tr>";
+        $totalMinutes += array_sum($total);
         ?>
         @endforeach
+        <?php
+            echo "<tr><td><b>Total</b><td></td><td></td><td></td><td><b>$totalMinutes</b></td></tr>";
+        ?>
         </table>
     </div>
 </section>

@@ -18,6 +18,13 @@ Route::any(
         );
     }
 );
+Route::any(
+    '/trial', function () {
+        return view(
+            'trial'
+        );
+    }
+);
 
 Route::any(
     '/user', function () {

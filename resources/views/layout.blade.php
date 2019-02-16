@@ -12,15 +12,9 @@
       <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
    </head>
    <body background="https://africastalking.com/img/voice/banner.png">
-      <section >
-         <div style= "background-color: #f0f0f0;">
-            <div>
+   <div class="header">
                <img src ="https://account.africastalking.com/assets/img/logos/logo-full-color.png" class="center">
-            </div>
-         </div>
-      </section>
-      <section class="center">
-         <div>
+</div>
             <?php
                if (isset($direction)) {
                    echo "<b><span style='padding:1%'>Direction:</b>$direction</span><br>";
@@ -30,8 +24,6 @@
                }
                
                ?>
-         </div>
          @yield('content')
-      </section>
    </body>
 </html>

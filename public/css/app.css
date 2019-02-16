@@ -2442,6 +2442,27 @@ input[type=button].btn-block,input[type=reset].btn-block,input[type=submit].btn-
     padding:.25rem 1.5rem;
     color:#212529
 }
+  * {
+    box-sizing: border-box;
+  }
+  
+  .header {
+    background-color: #f0f0f0;
+    padding: 30px;
+    text-align: center;
+  }
+  
+  .leftcol {
+    width: 50%;
+    float: left;
+    padding: 15px;
+  }
+  
+  .rightcol {
+    width: 50%;
+    float: left;
+    padding: 15px;
+} 
 .btn-group,.btn-group-vertical{
     position:relative;
     display:inline-flex;
@@ -2461,7 +2482,7 @@ input[type=button].btn-block,input[type=reset].btn-block,input[type=submit].btn-
     display:flex;
     flex-wrap:wrap;
     justify-content:flex-start
-}
+}  
 .btn-toolbar .input-group{
     width:auto
 }

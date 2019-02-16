@@ -3,7 +3,7 @@
 echo "<style> table, th, td {   border: 1px solid black; } </style>";
 $curl = curl_init();
 curl_setopt_array($curl, array(
-  CURLOPT_URL => "http://134.213.238.76:8080/voice/outbound/success?granularity=day&startDate=2019-01-29&endDate=2019-01-29&metric=duration&currencyCode=KES",
+  CURLOPT_URL => "http://134.213.238.76:8080/voice/outbound/success?granularity=day&startDate=2019-02-04&endDate=2019-02-05&metric=duration&currencyCode=KES",
   CURLOPT_RETURNTRANSFER => true,
   CURLOPT_CUSTOMREQUEST => "GET",
   CURLOPT_HTTPHEADER => array(
@@ -27,7 +27,7 @@ echo "<tr><th>Date</th><th>Username</th><th>Phonenumber</th><th>Country</th><th>
 foreach(array_keys($users) as $user){
     $curl = curl_init();
     curl_setopt_array($curl, array(
-        CURLOPT_URL => "http://134.213.238.76:8080/voice/outbound/success?granularity=day&startDate=2019-01-29&endDate=2019-01-29&metric=duration&currencyCode=KES&username=$user",
+        CURLOPT_URL => "http://134.213.238.76:8080/voice/outbound/success?granularity=day&startDate=2019-02-04&endDate=2019-02-05&metric=duration&currencyCode=KES&username=$user",
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_CUSTOMREQUEST => "GET",
         CURLOPT_HTTPHEADER => array(

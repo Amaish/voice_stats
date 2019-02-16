@@ -7,7 +7,7 @@ test
    <?php
       $curl = curl_init();
       curl_setopt_array($curl, array(
-        CURLOPT_URL => "http://134.213.238.76:8080/voice/outbound/success?granularity=day&startDate=2019-01-01&endDate=2019-01-02&metric=duration&currencyCode=KES",
+        CURLOPT_URL => "http://134.213.238.76:8080/voice/outbound/success?granularity=day&startDate=2019-01-01&endDate=2019-01-31&metric=duration&currencyCode=KES",
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_CUSTOMREQUEST => "GET",
         CURLOPT_HTTPHEADER => array(
@@ -59,7 +59,7 @@ test
       <?php
             $curl = curl_init();
             curl_setopt_array($curl, array(
-              CURLOPT_URL => "http://134.213.238.76:8080/voice/outbound/success?granularity=day&startDate=2019-01-01&endDate=2019-01-02&metric=duration&currencyCode=KES",
+              CURLOPT_URL => "http://134.213.238.76:8080/voice/outbound/success?granularity=day&startDate=2019-01-01&endDate=2019-01-31&metric=duration&currencyCode=KES",
               CURLOPT_RETURNTRANSFER => true,
               CURLOPT_CUSTOMREQUEST => "GET",
               CURLOPT_HTTPHEADER => array(
@@ -75,6 +75,8 @@ test
             $jsonString = $response;
             $jsonDecodedAllUser = json_decode($jsonString, true);
             echo "<pre>";
+            echo "<table>";
+            echo "<tr><th>Username</th><th>Date</th><th>Phone Number</th><th>Duration</th></tr>";
             $userData = array();
             foreach ($jsonDecodedAllUser as $responseUser => $valueUser) {
                 $AlluserStats = $value["userStats"];
@@ -92,7 +94,7 @@ test
             foreach ($userData as $User) {
                 $curl = curl_init();
                 curl_setopt_array($curl, array(
-                    CURLOPT_URL => "http://134.213.238.76:8080/voice/outbound/success?granularity=day&startDate=2019-01-01&endDate=2019-01-02&metric=duration&username=$User",
+                    CURLOPT_URL => "http://134.213.238.76:8080/voice/outbound/success?granularity=day&startDate=2019-01-01&endDate=2019-01-31&metric=duration&username=$User",
                     CURLOPT_RETURNTRANSFER => true,
                     CURLOPT_CUSTOMREQUEST => "GET",
                     CURLOPT_HTTPHEADER => array(
@@ -113,14 +115,18 @@ test
                     $Date = $phoneNumberStats[$i]['date'];
                     $number = $phoneNumberStats[$i]['elements'];
                     foreach ($number as $phoneNumber => $phoneDuration) {
-                        echo "$User ";
-                        echo "$Date ";  
-                        echo "$phoneNumber ";
-                        echo $phoneDuration;
-                        echo"<br>";
+                        if ($phoneDuration>0) {
+                            echo "<tr>";
+                            echo "<td>$User</td>";
+                            echo "<td>$Date</td>";  
+                            echo "<td>$phoneNumber</td>";
+                            echo "<td>$phoneDuration</td>";
+                            echo "</tr>";
+                        }
                     }
                 }
             }
+            echo "</table>";
         }
         echo "</pre>";
       ?>

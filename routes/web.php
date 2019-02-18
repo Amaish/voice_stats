@@ -61,6 +61,7 @@ Route::any(
             'numbers' => $numbers,
             'username' => $username,
             'direction' => $direction,
+            'error' => $err,
             ]
         );
     }
@@ -113,6 +114,62 @@ Route::any(
                 'end' => $end,
                 'totalPhoneDuration' => $totalPhoneDuration,
                 'userData' => $userData,
+                'error' => $err,
+            ]
+        );
+    }
+);
+Route::any(
+    '/userspercountry', function () {
+        $start = $_REQUEST['startDate'];
+        $end = $_REQUEST['endDate'];
+        $direction = $_REQUEST['direction'];
+        $Country = $_REQUEST['country'];
+        $curl = curl_init();
+        curl_setopt_array(
+            $curl, array(
+            CURLOPT_URL => "http://134.213.238.76:8080/voice/$direction/success?granularity=day&startDate=$start&endDate=$end&metric=duration",
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_CUSTOMREQUEST => 'GET',
+            CURLOPT_HTTPHEADER => array(
+            'ApiKey: 5afe31f1daa3de899c690f0172a719cee1f59e0a3251ec432f021c81b4d87ffd',
+            ),
+            )
+        );
+        $response = curl_exec($curl);
+        $err = curl_error($curl);
+        curl_close($curl);
+        if ($err) {
+            echo 'cURL Error #:'.$err;
+        }
+        $jsonString = $response;
+        $jsonDecodedAllUser = json_decode($jsonString, true);
+        $userData = array();
+        foreach ($jsonDecodedAllUser as $responseUser => $valueUser) {
+            $AlluserStats = $valueUser['userStats'];
+            $lengthAllUser = count($AlluserStats);
+            $totalDurationAll = array();
+            for ($i = 0; $i < $lengthAllUser; ++$i) {
+                $date = $AlluserStats[$i]['date'];
+                $Allusers = $AlluserStats[$i]['elements'];
+                foreach ($Allusers as $username => $duration) {
+                    if (!in_array($username, $userData)) {
+                        array_push($userData, $username);
+                    }
+                }
+            }
+        }
+        $totalPhoneDuration = array();
+
+        return view(
+            'userspercountry', [
+                'direction' => $direction,
+                'start' => $start,
+                'end' => $end,
+                'totalPhoneDuration' => $totalPhoneDuration,
+                'userData' => $userData,
+                'Country' => $Country,
+                'error' => $err,
             ]
         );
     }
@@ -169,6 +226,7 @@ Route::any(
             'start' => $start,
             'end' => $end,
             'direction' => $direction,
+            'error' => $err,
             ]
         );
     }

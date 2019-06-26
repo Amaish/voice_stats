@@ -2,7 +2,7 @@
     $curl = curl_init();
     curl_setopt_array(
         $curl, array(
-        CURLOPT_URL => "http://134.213.238.76:8080/voice/outbound/success?granularity=day&startDate=2019-01-20&endDate=2019-01-22&metric=duration",
+        CURLOPT_URL => "http://crunch.voice.at-internal.com/outbound/success?granularity=day&startDate=2019-01-20&endDate=2019-01-22&metric=duration",
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_CUSTOMREQUEST => "GET",
         CURLOPT_HTTPHEADER => array(
@@ -27,7 +27,7 @@
             $curl = curl_init();
             curl_setopt_array(
                 $curl, array(
-                CURLOPT_URL => "http://134.213.238.76:8080/voice/outbound/success?granularity=day&startDate=2019-01-29&endDate=2019-01-29&metric=duration&currencyCode=KES&username=$key2",
+                CURLOPT_URL => "http://crunch.voice.at-internal.com/outbound/success?granularity=day&startDate=2019-01-29&endDate=2019-01-29&metric=duration&currencyCode=KES&username=$key2",
                 CURLOPT_RETURNTRANSFER => true,
                 CURLOPT_CUSTOMREQUEST => "GET",
                 CURLOPT_HTTPHEADER => array(

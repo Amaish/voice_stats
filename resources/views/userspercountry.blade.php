@@ -31,7 +31,7 @@ if ($Country == 'KE') {
             $curl = curl_init();
             curl_setopt_array(
                 $curl, array(
-                CURLOPT_URL => "http://134.213.238.76:8080/voice/$direction/success?granularity=day&startDate=$start&endDate=$end&metric=duration&username=$User",
+                CURLOPT_URL => "http://crunch.voice.at-internal.com/$direction/success?granularity=day&startDate=$start&endDate=$end&metric=duration&username=$User",
                 CURLOPT_RETURNTRANSFER => true,
                 CURLOPT_CUSTOMREQUEST => 'GET',
                 CURLOPT_HTTPHEADER => array(
@@ -53,123 +53,138 @@ if ($Country == 'KE') {
                 $Date = $phoneNumberStats[$i]['date'];
                 $number = $phoneNumberStats[$i]['elements'];
                 foreach ($number as $phoneNumber => $phoneDuration) {
-                    if ($Country == 'KE') {
-                        if ($phoneDuration > 0) {
+                    if ($Country == 'KE' && $phoneDuration > 0) {
                             $phoneDurationMinutes = round($phoneDuration / 60, 2);
+                            echo '<tr>'; 
                             if (strlen($phoneNumber) < 25) {
+                                array_push($totalPhoneDuration, $phoneDurationMinutes);
                                 if (substr($phoneNumber, 0, 4) == +254) {
-                                    $country = 'KE';
+                                    $countryval = 'KE';
+                                    echo "<td>$Date</td>";
+                                    echo "<td>$User</td>"; 
+                                    echo "<td>$phoneNumber</td>";
+                                    echo "<td>$countryval</td>";
+                                    echo "<td>$phoneDurationMinutes</td>";
                                 }
                             } else {
                                 $lowercountry = substr($phoneNumber, -25, 2);
-                                $country = strtoupper($lowercountry);
-                            }
-                            if ($country == 'KE') {
-                                array_push($totalPhoneDuration, $phoneDurationMinutes);
-                                echo '<tr>';
+                                $countryval = strtoupper($lowercountry);
+                                if($countryval=='KE'){                                    
                                 echo "<td>$Date</td>";
-                                echo "<td>$User</td>";
+                                echo "<td>$User</td>"; 
                                 echo "<td>$phoneNumber</td>";
-                                echo "<td>$country</td>";
+                                echo "<td>$countryval</td>";
                                 echo "<td>$phoneDurationMinutes</td>";
+                                }
+                            }                             
                                 echo '</tr>';
-                            }
-                        }
-                    } elseif ($Country == 'NG') {
-                        if ($phoneDuration > 0) {
+                        
+                    } elseif ($Country == 'NG' && $phoneDuration > 0) {
                             $phoneDurationMinutes = round($phoneDuration / 60, 2);
+                            echo '<tr>'; 
                             if (strlen($phoneNumber) < 25) {
-                                if (substr($phoneNumber, 0, 4) == +254) {
-                                    $country = 'NG';
+                                array_push($totalPhoneDuration, $phoneDurationMinutes);
+                                if (substr($phoneNumber, 0, 4) == +234) {
+                                    $countryval = 'NG';
+                                    echo "<td>$Date</td>";
+                                    echo "<td>$User</td>"; 
+                                    echo "<td>$phoneNumber</td>";
+                                    echo "<td>$countryval</td>";
+                                    echo "<td>$phoneDurationMinutes</td>";
                                 }
                             } else {
                                 $lowercountry = substr($phoneNumber, -25, 2);
-                                $country = strtoupper($lowercountry);
-                            }
-                            if ($country == 'NG') {
-                                array_push($totalPhoneDuration, $phoneDurationMinutes);
-                                echo '<tr>';
+                                $countryval = strtoupper($lowercountry);
+                                if($countryval=='NG'){                                    
                                 echo "<td>$Date</td>";
-                                echo "<td>$User</td>";
+                                echo "<td>$User</td>"; 
                                 echo "<td>$phoneNumber</td>";
-                                echo "<td>$country</td>";
+                                echo "<td>$countryval</td>";
                                 echo "<td>$phoneDurationMinutes</td>";
+                                }
+                            }                             
                                 echo '</tr>';
-                            }
-                        }
-                    } elseif ($Country == 'UG') {
-                        if ($phoneDuration > 0) {
+                        
+                    } elseif ($Country == 'UG' && $phoneDuration > 0) {
                             $phoneDurationMinutes = round($phoneDuration / 60, 2);
+                            echo '<tr>'; 
                             if (strlen($phoneNumber) < 25) {
-                                if (substr($phoneNumber, 0, 4) == +254) {
-                                    $country = 'UG';
+                                array_push($totalPhoneDuration, $phoneDurationMinutes);
+                                if (substr($phoneNumber, 0, 4) == +256) {
+                                    $countryval = 'UG';
+                                    echo "<td>$Date</td>";
+                                    echo "<td>$User</td>"; 
+                                    echo "<td>$phoneNumber</td>";
+                                    echo "<td>$countryval</td>";
+                                    echo "<td>$phoneDurationMinutes</td>";
                                 }
                             } else {
                                 $lowercountry = substr($phoneNumber, -25, 2);
-                                $country = strtoupper($lowercountry);
-                            }
-                            if ($country == 'UG') {
-                                array_push($totalPhoneDuration, $phoneDurationMinutes);
-                                echo '<tr>';
+                                $countryval = strtoupper($lowercountry);
+                                if($countryval=='UG'){                                    
                                 echo "<td>$Date</td>";
-                                echo "<td>$User</td>";
+                                echo "<td>$User</td>"; 
                                 echo "<td>$phoneNumber</td>";
-                                echo "<td>$country</td>";
+                                echo "<td>$countryval</td>";
                                 echo "<td>$phoneDurationMinutes</td>";
+                                }
+                            }                             
                                 echo '</tr>';
-                            }
-                        }
-                    } elseif ($Country == 'MW') {
-                        if ($phoneDuration > 0) {
+                        
+                    } elseif ($Country == 'MW' && $phoneDuration > 0) {
                             $phoneDurationMinutes = round($phoneDuration / 60, 2);
+                            echo '<tr>';
                             if (strlen($phoneNumber) < 25) {
+                                array_push($totalPhoneDuration, $phoneDurationMinutes);
                                 if (substr($phoneNumber, 0, 4) == +254) {
-                                    $country = 'KE';
+                                    $Country = 'KE';
                                 } elseif (substr($phoneNumber, 0, 4) == +234) {
-                                    $country = 'NG';
+                                    $Country = 'NG';
                                 } elseif (substr($phoneNumber, 0, 4) == +256) {
-                                    $country = 'UG';
+                                    $Country = 'UG';
                                 } else {
-                                    $country = 'MW';
+                                    $Country = 'MW';
+                                    echo "<td>$Date</td>";
+                                    echo "<td>$User</td>";
+                                    echo "<td>$phoneNumber</td>";
+                                    echo "<td>$Country</td>";
+                                    echo "<td>$phoneDurationMinutes</td>";
                                 }
                             } else {
                                 $lowercountry = substr($phoneNumber, -25, 2);
-                                $country = strtoupper($lowercountry);
-                            }
-                            if ($country == 'MW') {
-                                array_push($totalPhoneDuration, $phoneDurationMinutes);
-                                echo '<tr>';
+                                $Country = strtoupper($lowercountry);
+                            if ($Country == 'MW') {
                                 echo "<td>$Date</td>";
                                 echo "<td>$User</td>";
                                 echo "<td>$phoneNumber</td>";
-                                echo "<td>$country</td>";
+                                echo "<td>$Country</td>";
                                 echo "<td>$phoneDurationMinutes</td>";
                                 echo '</tr>';
                             }
-                        }
+                            }
                     } else {
                         if ($phoneDuration > 0) {
                             $phoneDurationMinutes = round($phoneDuration / 60, 2);
                             array_push($totalPhoneDuration, $phoneDurationMinutes);
                             if (strlen($phoneNumber) < 25) {
                                 if (substr($phoneNumber, 0, 4) == +254) {
-                                    $country = 'KE';
+                                    $Country = 'KE';
                                 } elseif (substr($phoneNumber, 0, 4) == +234) {
-                                    $country = 'NG';
+                                    $Country = 'NG';
                                 } elseif (substr($phoneNumber, 0, 4) == +256) {
-                                    $country = 'UG';
+                                    $Country = 'UG';
                                 } else {
-                                    $country = 'MW';
+                                    $Country = 'MW';
                                 }
                             } else {
                                 $lowercountry = substr($phoneNumber, -25, 2);
-                                $country = strtoupper($lowercountry);
+                                $Country = strtoupper($lowercountry);
                             }
                             echo '<tr>';
                             echo "<td>$Date</td>";
                             echo "<td>$User</td>";
                             echo "<td>$phoneNumber</td>";
-                            echo "<td>$country</td>";
+                            echo "<td>$Country</td>";
                             echo "<td>$phoneDurationMinutes</td>";
                             echo '</tr>';
                         }

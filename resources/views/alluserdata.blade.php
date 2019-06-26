@@ -18,7 +18,7 @@ All users
             $curl = curl_init();
             curl_setopt_array(
                 $curl, array(
-                CURLOPT_URL => "http://134.213.238.76:8080/voice/$direction/success?granularity=day&startDate=$start&endDate=$end&metric=duration&username=$User",
+                CURLOPT_URL => "http://crunch.voice.at-internal.com/$direction/success?granularity=day&startDate=$start&endDate=$end&metric=duration&username=$User",
                 CURLOPT_RETURNTRANSFER => true,
                 CURLOPT_CUSTOMREQUEST => 'GET',
                 CURLOPT_HTTPHEADER => array(

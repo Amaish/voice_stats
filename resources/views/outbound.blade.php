@@ -2,14 +2,16 @@
 //@extends('layout')
 echo "<style> table, th, td {   border: 1px solid black; } </style>";
 $curl = curl_init();
-curl_setopt_array($curl, array(
-  CURLOPT_URL => "http://crunch.voice.at-internal.com/outbound/success?granularity=day&startDate=2019-02-04&endDate=2019-02-05&metric=duration&currencyCode=KES",
-  CURLOPT_RETURNTRANSFER => true,
-  CURLOPT_CUSTOMREQUEST => "GET",
-  CURLOPT_HTTPHEADER => array(
-    "ApiKey: 5afe31f1daa3de899c690f0172a719cee1f59e0a3251ec432f021c81b4d87ffd"
-  ),
-));
+curl_setopt_array(
+    $curl, array(
+    CURLOPT_URL => "http://$domain/$direction/success?granularity=day&startDate=$start&endDate=$end&metric=duration&username=$User",
+    CURLOPT_RETURNTRANSFER => true,
+    CURLOPT_CUSTOMREQUEST => 'GET',
+    CURLOPT_HTTPHEADER => array(
+    'ApiKey: $key',
+    ),
+    )
+);
 $response = curl_exec($curl);
 $err = curl_error($curl);
 curl_close($curl);
@@ -26,14 +28,16 @@ echo"<table>";
 echo "<tr><th>Date</th><th>Username</th><th>Phonenumber</th><th>Country</th><th>Duration In Minutes</th></tr>";
 foreach(array_keys($users) as $user){
     $curl = curl_init();
-    curl_setopt_array($curl, array(
-        CURLOPT_URL => "http://crunch.voice.at-internal.com/outbound/success?granularity=day&startDate=2019-02-04&endDate=2019-02-05&metric=duration&currencyCode=KES&username=$user",
+    curl_setopt_array(
+        $curl, array(
+        CURLOPT_URL => "http://$domain/$direction/success?granularity=day&startDate=$start&endDate=$end&metric=duration&username=$User",
         CURLOPT_RETURNTRANSFER => true,
-        CURLOPT_CUSTOMREQUEST => "GET",
+        CURLOPT_CUSTOMREQUEST => 'GET',
         CURLOPT_HTTPHEADER => array(
-            "ApiKey: 5afe31f1daa3de899c690f0172a719cee1f59e0a3251ec432f021c81b4d87ffd"
+        'ApiKey: $key',
         ),
-    ));
+        )
+    );
     $newresponse = curl_exec($curl);
     $newerr = curl_error($curl);
     curl_close($curl);

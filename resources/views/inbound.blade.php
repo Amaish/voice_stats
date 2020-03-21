@@ -1,15 +1,15 @@
 <?php
     $curl = curl_init();
-    curl_setopt_array(
-        $curl, array(
-        CURLOPT_URL => "http://crunch.voice.at-internal.com/outbound/success?granularity=day&startDate=2019-01-20&endDate=2019-01-22&metric=duration",
-        CURLOPT_RETURNTRANSFER => true,
-        CURLOPT_CUSTOMREQUEST => "GET",
-        CURLOPT_HTTPHEADER => array(
-            "ApiKey: 5afe31f1daa3de899c690f0172a719cee1f59e0a3251ec432f021c81b4d87ffd"
-        ),
-        )
-    );
+        curl_setopt_array(
+            $curl, array(
+            CURLOPT_URL => "http://$domain/$direction/success?granularity=day&startDate=$start&endDate=$end&metric=duration&username=$User",
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_CUSTOMREQUEST => 'GET',
+            CURLOPT_HTTPHEADER => array(
+            'ApiKey: $key',
+            ),
+            )
+        );
     $response = curl_exec($curl);
     $err = curl_error($curl);
     curl_close($curl);
@@ -25,16 +25,16 @@
         $elements = $user['elements'];
         foreach ($elements as $key2 => $value2) {
             $curl = curl_init();
-            curl_setopt_array(
-                $curl, array(
-                CURLOPT_URL => "http://crunch.voice.at-internal.com/outbound/success?granularity=day&startDate=2019-01-29&endDate=2019-01-29&metric=duration&currencyCode=KES&username=$key2",
-                CURLOPT_RETURNTRANSFER => true,
-                CURLOPT_CUSTOMREQUEST => "GET",
-                CURLOPT_HTTPHEADER => array(
-                    "ApiKey: 5afe31f1daa3de899c690f0172a719cee1f59e0a3251ec432f021c81b4d87ffd"
-                ),
-                )
-            );
+                curl_setopt_array(
+                    $curl, array(
+                    CURLOPT_URL => "http://$domain/$direction/success?granularity=day&startDate=$start&endDate=$end&metric=duration&username=$User",
+                    CURLOPT_RETURNTRANSFER => true,
+                    CURLOPT_CUSTOMREQUEST => 'GET',
+                    CURLOPT_HTTPHEADER => array(
+                    'ApiKey: $key',
+                    ),
+                    )
+                );
             $newresponse = curl_exec($curl);
             $newerr = curl_error($curl);
             curl_close($curl);
